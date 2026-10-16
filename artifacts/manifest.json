@@ -1,0 +1,34 @@
+{
+  "repository": "Tin60giay/papner-phobert-v2-crf-hsupcon",
+  "release": "v1.0.0",
+  "model_id": "vinai/phobert-base-v2",
+  "original_notebook_unchanged": true,
+  "weights_trained_on": "Vast.ai NVIDIA GeForce RTX 3090 (24 GB)",
+  "kaggle_training_verified": false,
+  "files": [
+    {
+      "name": "best_model.pt",
+      "bytes": 538671007,
+      "sha256": "449743cbb5b89ab8860d46875577a170600208a00120150772b799cfbd351bab",
+      "location": "GitHub Release asset"
+    },
+    {
+      "name": "train.log",
+      "bytes": 12630,
+      "sha256": "3e9aeaeadcfe6df0a05fc1e4fbfa21c8ef8a0cf7199b3c9012c86b1f8f71c63e",
+      "location": "logs/train.log"
+    },
+    {
+      "name": "runner.log",
+      "bytes": 13656,
+      "sha256": "e5b121ae9cca22c98173e0c987545ee5803b3294a8714c987ca760f83d6b0802",
+      "location": "logs/runner.log"
+    },
+    {
+      "name": "baselineHierarchicalSupCon_PhoBERTv2_Vast_RTX3090.ipynb",
+      "bytes": 105009,
+      "sha256": "aea1caf4f73aba798f340ab5c7503500f85219e50381d7b3036c77a270e8381a",
+      "location": "notebooks/baselineHierarchicalSupCon_PhoBERTv2_Vast_RTX3090.ipynb"
+    }
+  ]
+}

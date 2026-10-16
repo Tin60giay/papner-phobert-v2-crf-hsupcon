@@ -1,0 +1,236 @@
+[NbConvertApp] Converting notebook /workspace/baselineHierarchicalSupCon_PhoBERTv2_Vast_RTX3090.ipynb to notebook
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+Traceback (most recent call last):
+  File "/usr/local/bin/jupyter-nbconvert", line 8, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/jupyter_core/application.py", line 284, in launch_instance
+    super().launch_instance(argv=argv, **kwargs)
+  File "/usr/local/lib/python3.12/dist-packages/traitlets/config/application.py", line 1080, in launch_instance
+    app.start()
+  File "/usr/local/lib/python3.12/dist-packages/nbconvert/nbconvertapp.py", line 420, in start
+    self.convert_notebooks()
+  File "/usr/local/lib/python3.12/dist-packages/nbconvert/nbconvertapp.py", line 597, in convert_notebooks
+    self.convert_single_notebook(notebook_filename)
+  File "/usr/local/lib/python3.12/dist-packages/nbconvert/nbconvertapp.py", line 563, in convert_single_notebook
+    output, resources = self.export_single_notebook(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/nbconvert/nbconvertapp.py", line 487, in export_single_notebook
+    output, resources = self.exporter.from_filename(
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/nbconvert/exporters/exporter.py", line 201, in from_filename
+    return self.from_file(f, resources=resources, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/nbconvert/exporters/exporter.py", line 220, in from_file
+    return self.from_notebook_node(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/nbconvert/exporters/notebook.py", line 36, in from_notebook_node
+    nb_copy, resources = super().from_notebook_node(nb, resources, **kw)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/nbconvert/exporters/exporter.py", line 154, in from_notebook_node
+    nb_copy, resources = self._preprocess(nb_copy, resources)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/nbconvert/exporters/exporter.py", line 353, in _preprocess
+    nbc, resc = preprocessor(nbc, resc)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/nbconvert/preprocessors/base.py", line 48, in __call__
+    return self.preprocess(nb, resources)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/nbconvert/preprocessors/execute.py", line 103, in preprocess
+    self.preprocess_cell(cell, resources, index)
+  File "/usr/local/lib/python3.12/dist-packages/nbconvert/preprocessors/execute.py", line 124, in preprocess_cell
+    cell = self.execute_cell(cell, index, store_history=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/usr/local/lib/python3.12/dist-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Bước 7: Đánh giá cho paper (entity-level, micro/macro, bốn tiêu chí)
+from nervaluate.evaluator import Evaluator
+from contextlib import nullcontext
+import pandas as pd
+import torch
+
+paper_gold, paper_pred = [], []
+paper_model.eval()
+with torch.no_grad():
+    for batch in tqdm(paper_test_iterator, total=len(paper_test_iterator), desc="Paper NER metrics"):
+        batch = {key: value.to(paper_device, non_blocking=True) if isinstance(value, torch.Tensor) else value
+                 for key, value in batch.items()}
+        amp_ctx = (torch.amp.autocast('cuda') if paper_use_amp and str(paper_device).startswith('cuda')
+                   else nullcontext())
+        with amp_ctx:
+            outputs = paper_model(**batch)
+        for gold_ids, mask, pred_ids in zip(batch['labels'], batch['label_masks'], outputs.tags):
+            gold_ids = gold_ids[mask != 0].detach().cpu().tolist()
+            pred_ids = list(pred_ids)
+            assert len(gold_ids) == len(pred_ids), "Gold/pred phải có cùng số token trong mỗi câu"
+            paper_gold.append([paper_classes[int(tag)] for tag in gold_ids])
+            paper_pred.append([paper_classes[int(tag)] for tag in pred_ids])
+
+entity_types = [label[2:] for label in paper_classes if label.startswith('B-')]
+assert len(paper_gold) == len(paper_test_iterator.dataset)
+evaluator = Evaluator(paper_gold, paper_pred, tags=entity_types, loader="list")
+overall, per_type, _, _ = evaluator.evaluate()
+rows = []
+for display_name, scenario in [('Strict', 'strict'), ('Partial', 'partial'),
+                               ('Entity Type', 'ent_type'), ('Exact', 'exact')]:
+    for average, metrics in [('micro', overall[scenario]),
+                             ('macro', {key: sum(per_type[tag][scenario][key] for tag in entity_types) / len(entity_types)
+                                        for key in ('precision', 'recall', 'f1')})]:
+        rows.append({'Criterion': display_name, 'Average': average,
+                     'Precision': metrics['precision'], 'Recall': metrics['recall'],
+                     'F1': metrics['f1']})
+summary = pd.DataFrame(rows)
+print(f"Paper evaluation: {len(paper_gold):,} câu | {HF_TEST_REPO} @ {test_repo_info.sha}")
+print(summary.to_string(index=False, float_format=lambda value: f"{value:.4f}"))
+
+detail_rows = []
+for entity_type in entity_types:
+    for display_name, scenario in [('Strict', 'strict'), ('Partial', 'partial'),
+                                   ('Entity Type', 'ent_type'), ('Exact', 'exact')]:
+        metrics = per_type[entity_type][scenario]
+        detail_rows.append({'Type': entity_type, 'Criterion': display_name,
+                            'COR': metrics['correct'], 'INC': metrics['incorrect'],
+                            'PAR': metrics['partial'], 'MIS': metrics['missed'],
+                            'SPU': metrics['spurious'], 'POS': metrics['possible'],
+                            'ACT': metrics['actual'], 'Precision': metrics['precision'],
+                            'Recall': metrics['recall'], 'F1': metrics['f1']})
+details = pd.DataFrame(detail_rows)
+print("\nChi tiết theo loại thực thể:")
+print(details.to_string(index=False, float_format=lambda value: f"{value:.4f}"))
+
+------------------
+
+----- stdout -----
+Paper NER metrics:   0%|          | 0/643 [00:00<?, ?it/s]
+----- stdout -----
+Paper NER metrics:   2%|▏         | 11/643 [00:02<01:56,  5.42it/s]
+----- stdout -----
+Paper NER metrics:   4%|▎         | 23/643 [00:04<01:49,  5.67it/s]
+----- stdout -----
+Paper NER metrics:   5%|▌         | 35/643 [00:06<01:45,  5.78it/s]
+----- stdout -----
+Paper NER metrics:   7%|▋         | 47/643 [00:08<01:41,  5.86it/s]
+----- stdout -----
+Paper NER metrics:   9%|▉         | 60/643 [00:10<01:38,  5.92it/s]
+----- stdout -----
+Paper NER metrics:  11%|█▏        | 73/643 [00:12<01:35,  5.94it/s]
+----- stdout -----
+Paper NER metrics:  13%|█▎        | 86/643 [00:14<01:33,  5.97it/s]
+----- stdout -----
+Paper NER metrics:  15%|█▌        | 98/643 [00:16<01:31,  5.97it/s]
+----- stdout -----
+Paper NER metrics:  17%|█▋        | 110/643 [00:18<01:29,  5.95it/s]
+----- stdout -----
+Paper NER metrics:  19%|█▉        | 122/643 [00:20<01:27,  5.94it/s]
+----- stdout -----
+Paper NER metrics:  21%|██        | 134/643 [00:22<01:26,  5.91it/s]
+----- stdout -----
+Paper NER metrics:  23%|██▎       | 146/643 [00:24<01:24,  5.87it/s]
+----- stdout -----
+Paper NER metrics:  25%|██▍       | 158/643 [00:26<01:22,  5.86it/s]
+----- stdout -----
+Paper NER metrics:  26%|██▋       | 170/643 [00:28<01:21,  5.83it/s]
+----- stdout -----
+Paper NER metrics:  28%|██▊       | 182/643 [00:31<01:19,  5.81it/s]
+----- stdout -----
+Paper NER metrics:  30%|███       | 194/643 [00:33<01:17,  5.79it/s]
+----- stdout -----
+Paper NER metrics:  32%|███▏      | 206/643 [00:35<01:15,  5.76it/s]
+----- stdout -----
+Paper NER metrics:  34%|███▍      | 218/643 [00:37<01:14,  5.72it/s]
+----- stdout -----
+Paper NER metrics:  36%|███▌      | 230/643 [00:39<01:12,  5.72it/s]
+----- stdout -----
+Paper NER metrics:  38%|███▊      | 242/643 [00:41<01:09,  5.74it/s]
+----- stdout -----
+Paper NER metrics:  40%|███▉      | 254/643 [00:43<01:07,  5.76it/s]
+----- stdout -----
+Paper NER metrics:  41%|████▏     | 266/643 [00:45<01:05,  5.80it/s]
+----- stdout -----
+Paper NER metrics:  43%|████▎     | 278/643 [00:47<01:02,  5.81it/s]
+----- stdout -----
+Paper NER metrics:  45%|████▌     | 290/643 [00:49<01:00,  5.83it/s]
+----- stdout -----
+Paper NER metrics:  47%|████▋     | 302/643 [00:51<00:58,  5.88it/s]
+----- stdout -----
+Paper NER metrics:  49%|████▉     | 314/643 [00:53<00:55,  5.89it/s]
+----- stdout -----
+Paper NER metrics:  51%|█████     | 327/643 [00:55<00:53,  5.94it/s]
+----- stdout -----
+Paper NER metrics:  53%|█████▎    | 340/643 [00:58<00:50,  5.97it/s]
+----- stdout -----
+Paper NER metrics:  55%|█████▍    | 353/643 [01:00<00:48,  5.99it/s]
+----- stdout -----
+Paper NER metrics:  57%|█████▋    | 366/643 [01:02<00:46,  6.00it/s]
+----- stdout -----
+Paper NER metrics:  59%|█████▉    | 379/643 [01:04<00:44,  6.00it/s]
+----- stdout -----
+Paper NER metrics:  61%|██████    | 391/643 [01:06<00:42,  5.99it/s]
+----- stdout -----
+Paper NER metrics:  63%|██████▎   | 404/643 [01:08<00:39,  5.99it/s]
+----- stdout -----
+Paper NER metrics:  65%|██████▍   | 417/643 [01:10<00:37,  6.01it/s]
+----- stdout -----
+Paper NER metrics:  67%|██████▋   | 430/643 [01:13<00:35,  6.03it/s]
+----- stdout -----
+Paper NER metrics:  69%|██████▉   | 443/643 [01:15<00:33,  6.01it/s]
+----- stdout -----
+Paper NER metrics:  71%|███████   | 456/643 [01:17<00:31,  6.01it/s]
+----- stdout -----
+Paper NER metrics:  73%|███████▎  | 469/643 [01:19<00:28,  6.02it/s]
+----- stdout -----
+Paper NER metrics:  75%|███████▍  | 482/643 [01:21<00:26,  6.04it/s]
+----- stdout -----
+Paper NER metrics:  77%|███████▋  | 495/643 [01:23<00:24,  6.03it/s]
+----- stdout -----
+Paper NER metrics:  79%|███████▉  | 508/643 [01:25<00:22,  6.04it/s]
+----- stdout -----
+Paper NER metrics:  81%|████████  | 521/643 [01:28<00:20,  6.06it/s]
+----- stdout -----
+Paper NER metrics:  83%|████████▎ | 534/643 [01:30<00:17,  6.06it/s]
+----- stdout -----
+Paper NER metrics:  85%|████████▌ | 547/643 [01:32<00:15,  6.07it/s]
+----- stdout -----
+Paper NER metrics:  87%|████████▋ | 560/643 [01:34<00:13,  6.07it/s]
+----- stdout -----
+Paper NER metrics:  89%|████████▉ | 573/643 [01:36<00:11,  6.07it/s]
+----- stdout -----
+Paper NER metrics:  91%|█████████ | 586/643 [01:38<00:09,  6.05it/s]
+----- stdout -----
+Paper NER metrics:  93%|█████████▎| 599/643 [01:41<00:07,  6.01it/s]
+----- stdout -----
+Paper NER metrics:  95%|█████████▌| 612/643 [01:43<00:05,  6.00it/s]
+----- stdout -----
+Paper NER metrics:  97%|█████████▋| 625/643 [01:45<00:03,  5.95it/s]
+----- stdout -----
+Paper NER metrics:  99%|█████████▉| 637/643 [01:47<00:01,  5.96it/s]
+----- stdout -----
+Paper NER metrics: 100%|██████████| 643/643 [01:48<00:00,  5.93it/s]
+----- stdout -----
+
+------------------
+
+[31m---------------------------------------------------------------------------[39m
+[31mTypeError[39m                                 Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[8][39m[32m, line 31[39m
+[32m     27[39m overall, per_type, _, _ = evaluator.evaluate()
+[32m     28[39m rows = []
+[32m     29[39m for display_name, scenario in [('Strict', 'strict'), ('Partial', 'partial'),
+[32m     30[39m                                ([33m'Entity Type'[39m, [33m'ent_type'[39m), ([33m'Exact'[39m, [33m'exact'[39m)]:
+[32m---> [39m[32m31[39m     for average, metrics in [('micro', overall[scenario]),
+[32m     32[39m                              ('macro', {key: sum(per_type[tag][scenario][key] for tag in entity_types) / len(entity_types)
+[32m     33[39m                                         [38;5;28;01mfor[39;00m key [38;5;28;01min[39;00m ([33m'precision'[39m, [33m'recall'[39m, [33m'f1'[39m)})]:
+[32m     34[39m         rows.append({'Criterion': display_name, 'Average': average,
+
+[31mTypeError[39m: string indices must be integers, not 'str'
+

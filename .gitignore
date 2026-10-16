@@ -1,0 +1,10 @@
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+.env
+*.pt
+*.pth
+*.bin
+*.part
+.cache/
+.hf_home/

@@ -1,0 +1,169 @@
+2026-10-16 09:49:29,440 Arguments: Namespace(type='train', task='pap_ner', data_dir='/workspace/phobertv2_hsupcon/hf_pap_ner_dedup_70_15_15', overwrite_data=False, load_weights=None, model_name_or_path='vinai/phobert-base-v2', model_arch='crf', use_supcon=True, lambda_supcon=0.3, supcon_temp=0.07, supcon_mode='hierarchical', supcon_alpha=0.3, output_dir='outputs/phobertv2_crf_hierarchical_supcon_vast_3090', max_seq_length=256, train_batch_size=128, eval_batch_size=128, learning_rate=2e-05, classifier_learning_rate=0.001, epochs=20, warmup_proportion=0.1, weight_decay=0.01, adam_epsilon=1e-06, max_grad_norm=1.0, early_stop=3.0, run_test=False, no_cuda=False, seed=42, num_workers=2, fp16=True, save_step=20000, gradient_accumulation_steps=1)
+2026-10-16 09:52:59,125 Using Mixed Precision (AMP FP16): True, Pin Memory: True, Num Workers: 2
+2026-10-16 09:52:59,127 
+==============================Training epoch 0==============================
+2026-10-16 09:56:12,070 	********************Train Summary********************
+2026-10-16 09:56:12,071 	Training Lr: 9.680851063829787e-06; Loss: 22.9527; CRF Loss: 21.5440; SupCon Loss: 4.6956; Spend time: 0:03:12.942591
+2026-10-16 09:56:26,289 	********************Validate Summary********************
+2026-10-16 09:56:26,290 	Validation Loss: 3.6460;
+	BIO-Accuracy: 0.9632;
+	BIO-Macro-F1 score: 0.6933; 	Spend time: 0:00:14.215822
+2026-10-16 09:56:26,292 	********************Epoch Summary********************
+2026-10-16 09:56:26,293 	Epoch Loss = 3.645997 ; Best loss = inf
+2026-10-16 09:56:26,293 	Epoch BIO-F1 score = 0.693271 ; Best score = 0.000000
+2026-10-16 09:56:26,294 	***New best model, saving to outputs/phobertv2_crf_hierarchical_supcon_vast_3090/best_model.pt...***
+2026-10-16 09:56:26,911 
+==============================Training epoch 1==============================
+2026-10-16 09:59:40,694 	********************Train Summary********************
+2026-10-16 09:59:40,696 	Training Lr: 1.973404255319149e-05; Loss: 2.5800; CRF Loss: 1.3353; SupCon Loss: 4.1491; Spend time: 0:03:13.784353
+2026-10-16 09:59:54,932 	********************Validate Summary********************
+2026-10-16 09:59:54,933 	Validation Loss: 2.1445;
+	BIO-Accuracy: 0.9817;
+	BIO-Macro-F1 score: 0.9162; 	Spend time: 0:00:14.232845
+2026-10-16 09:59:54,935 	********************Epoch Summary********************
+2026-10-16 09:59:54,935 	Epoch Loss = 2.144468 ; Best loss = 3.645997
+2026-10-16 09:59:54,936 	Epoch BIO-F1 score = 0.916161 ; Best score = 0.693271
+2026-10-16 09:59:54,937 	***New best model, saving to outputs/phobertv2_crf_hierarchical_supcon_vast_3090/best_model.pt...***
+2026-10-16 09:59:55,751 
+==============================Training epoch 2==============================
+2026-10-16 10:03:09,437 	********************Train Summary********************
+2026-10-16 10:03:09,438 	Training Lr: 1.891843971631206e-05; Loss: 1.7591; CRF Loss: 0.5240; SupCon Loss: 4.1171; Spend time: 0:03:13.686057
+2026-10-16 10:03:23,723 	********************Validate Summary********************
+2026-10-16 10:03:23,723 	Validation Loss: 1.4625;
+	BIO-Accuracy: 0.9937;
+	BIO-Macro-F1 score: 0.9720; 	Spend time: 0:00:14.281550
+2026-10-16 10:03:23,725 	********************Epoch Summary********************
+2026-10-16 10:03:23,726 	Epoch Loss = 1.462511 ; Best loss = 2.144468
+2026-10-16 10:03:23,727 	Epoch BIO-F1 score = 0.971993 ; Best score = 0.916161
+2026-10-16 10:03:23,727 	***New best model, saving to outputs/phobertv2_crf_hierarchical_supcon_vast_3090/best_model.pt...***
+2026-10-16 10:03:24,556 
+==============================Training epoch 3==============================
+2026-10-16 10:06:39,080 	********************Train Summary********************
+2026-10-16 10:06:39,081 	Training Lr: 1.7801418439716312e-05; Loss: 1.5215; CRF Loss: 0.2909; SupCon Loss: 4.1019; Spend time: 0:03:14.523583
+2026-10-16 10:06:53,384 	********************Validate Summary********************
+2026-10-16 10:06:53,385 	Validation Loss: 1.3620;
+	BIO-Accuracy: 0.9957;
+	BIO-Macro-F1 score: 0.9804; 	Spend time: 0:00:14.299911
+2026-10-16 10:06:53,386 	********************Epoch Summary********************
+2026-10-16 10:06:53,387 	Epoch Loss = 1.361973 ; Best loss = 1.462511
+2026-10-16 10:06:53,388 	Epoch BIO-F1 score = 0.980431 ; Best score = 0.971993
+2026-10-16 10:06:53,389 	***New best model, saving to outputs/phobertv2_crf_hierarchical_supcon_vast_3090/best_model.pt...***
+2026-10-16 10:06:54,197 
+==============================Training epoch 4==============================
+2026-10-16 10:10:11,507 	********************Train Summary********************
+2026-10-16 10:10:11,509 	Training Lr: 1.668439716312057e-05; Loss: 1.4080; CRF Loss: 0.1788; SupCon Loss: 4.0972; Spend time: 0:03:17.310186
+2026-10-16 10:10:26,108 	********************Validate Summary********************
+2026-10-16 10:10:26,109 	Validation Loss: 1.3727;
+	BIO-Accuracy: 0.9957;
+	BIO-Macro-F1 score: 0.9787; 	Spend time: 0:00:14.596560
+2026-10-16 10:10:26,111 	********************Epoch Summary********************
+2026-10-16 10:10:26,111 	Epoch Loss = 1.372670 ; Best loss = 1.361973
+2026-10-16 10:10:26,112 	Epoch BIO-F1 score = 0.978665 ; Best score = 0.980431
+2026-10-16 10:10:26,113 
+==============================Training epoch 5==============================
+2026-10-16 10:13:42,018 	********************Train Summary********************
+2026-10-16 10:13:42,019 	Training Lr: 1.5567375886524826e-05; Loss: 1.3521; CRF Loss: 0.1227; SupCon Loss: 4.0979; Spend time: 0:03:15.905726
+2026-10-16 10:13:56,446 	********************Validate Summary********************
+2026-10-16 10:13:56,447 	Validation Loss: 1.2802;
+	BIO-Accuracy: 0.9974;
+	BIO-Macro-F1 score: 0.9857; 	Spend time: 0:00:14.424303
+2026-10-16 10:13:56,448 	********************Epoch Summary********************
+2026-10-16 10:13:56,449 	Epoch Loss = 1.280207 ; Best loss = 1.361973
+2026-10-16 10:13:56,450 	Epoch BIO-F1 score = 0.985654 ; Best score = 0.980431
+2026-10-16 10:13:56,451 	***New best model, saving to outputs/phobertv2_crf_hierarchical_supcon_vast_3090/best_model.pt...***
+2026-10-16 10:13:57,275 
+==============================Training epoch 6==============================
+2026-10-16 10:17:11,539 	********************Train Summary********************
+2026-10-16 10:17:11,539 	Training Lr: 1.4450354609929078e-05; Loss: 1.3176; CRF Loss: 0.0891; SupCon Loss: 4.0952; Spend time: 0:03:14.263145
+2026-10-16 10:17:25,863 	********************Validate Summary********************
+2026-10-16 10:17:25,864 	Validation Loss: 1.3888;
+	BIO-Accuracy: 0.9964;
+	BIO-Macro-F1 score: 0.9797; 	Spend time: 0:00:14.321080
+2026-10-16 10:17:25,866 	********************Epoch Summary********************
+2026-10-16 10:17:25,867 	Epoch Loss = 1.388751 ; Best loss = 1.280207
+2026-10-16 10:17:25,867 	Epoch BIO-F1 score = 0.979664 ; Best score = 0.985654
+2026-10-16 10:17:25,868 
+==============================Training epoch 7==============================
+2026-10-16 10:20:40,477 	********************Train Summary********************
+2026-10-16 10:20:40,478 	Training Lr: 1.3333333333333333e-05; Loss: 1.2994; CRF Loss: 0.0720; SupCon Loss: 4.0913; Spend time: 0:03:14.609885
+2026-10-16 10:20:54,905 	********************Validate Summary********************
+2026-10-16 10:20:54,906 	Validation Loss: 1.2975;
+	BIO-Accuracy: 0.9975;
+	BIO-Macro-F1 score: 0.9874; 	Spend time: 0:00:14.423381
+2026-10-16 10:20:54,907 	********************Epoch Summary********************
+2026-10-16 10:20:54,908 	Epoch Loss = 1.297453 ; Best loss = 1.280207
+2026-10-16 10:20:54,909 	Epoch BIO-F1 score = 0.987413 ; Best score = 0.985654
+2026-10-16 10:20:54,909 	***New best model, saving to outputs/phobertv2_crf_hierarchical_supcon_vast_3090/best_model.pt...***
+2026-10-16 10:20:55,732 
+==============================Training epoch 8==============================
+2026-10-16 10:24:13,544 	********************Train Summary********************
+2026-10-16 10:24:13,546 	Training Lr: 1.2216312056737589e-05; Loss: 1.2753; CRF Loss: 0.0469; SupCon Loss: 4.0943; Spend time: 0:03:17.812259
+2026-10-16 10:24:28,158 	********************Validate Summary********************
+2026-10-16 10:24:28,159 	Validation Loss: 1.3354;
+	BIO-Accuracy: 0.9973;
+	BIO-Macro-F1 score: 0.9870; 	Spend time: 0:00:14.609372
+2026-10-16 10:24:28,161 	********************Epoch Summary********************
+2026-10-16 10:24:28,162 	Epoch Loss = 1.335425 ; Best loss = 1.280207
+2026-10-16 10:24:28,163 	Epoch BIO-F1 score = 0.987047 ; Best score = 0.987413
+2026-10-16 10:24:28,164 
+==============================Training epoch 9==============================
+2026-10-16 10:27:48,984 	********************Train Summary********************
+2026-10-16 10:27:48,985 	Training Lr: 1.1099290780141846e-05; Loss: 1.2611; CRF Loss: 0.0348; SupCon Loss: 4.0877; Spend time: 0:03:20.820538
+2026-10-16 10:28:03,933 	********************Validate Summary********************
+2026-10-16 10:28:03,934 	Validation Loss: 1.3609;
+	BIO-Accuracy: 0.9972;
+	BIO-Macro-F1 score: 0.9854; 	Spend time: 0:00:14.945209
+2026-10-16 10:28:03,936 	********************Epoch Summary********************
+2026-10-16 10:28:03,937 	Epoch Loss = 1.360916 ; Best loss = 1.280207
+2026-10-16 10:28:03,937 	Epoch BIO-F1 score = 0.985384 ; Best score = 0.987413
+2026-10-16 10:28:03,938 
+==============================Training epoch 10==============================
+2026-10-16 10:31:20,752 	********************Train Summary********************
+2026-10-16 10:31:20,753 	Training Lr: 9.982269503546101e-06; Loss: 1.2553; CRF Loss: 0.0279; SupCon Loss: 4.0916; Spend time: 0:03:16.814461
+2026-10-16 10:31:35,701 	********************Validate Summary********************
+2026-10-16 10:31:35,702 	Validation Loss: 1.4164;
+	BIO-Accuracy: 0.9971;
+	BIO-Macro-F1 score: 0.9850; 	Spend time: 0:00:14.945080
+2026-10-16 10:31:35,704 	********************Epoch Summary********************
+2026-10-16 10:31:35,705 	Epoch Loss = 1.416402 ; Best loss = 1.280207
+2026-10-16 10:31:35,705 	Epoch BIO-F1 score = 0.984965 ; Best score = 0.987413
+2026-10-16 10:31:35,706 
+==============================Training epoch 11==============================
+2026-10-16 10:34:54,068 	********************Train Summary********************
+2026-10-16 10:34:54,069 	Training Lr: 8.865248226950355e-06; Loss: 1.2496; CRF Loss: 0.0230; SupCon Loss: 4.0887; Spend time: 0:03:18.362535
+2026-10-16 10:35:08,866 	********************Validate Summary********************
+2026-10-16 10:35:08,867 	Validation Loss: 1.5039;
+	BIO-Accuracy: 0.9963;
+	BIO-Macro-F1 score: 0.9815; 	Spend time: 0:00:14.794750
+2026-10-16 10:35:08,869 	********************Epoch Summary********************
+2026-10-16 10:35:08,870 	Epoch Loss = 1.503871 ; Best loss = 1.280207
+2026-10-16 10:35:08,871 	Epoch BIO-F1 score = 0.981463 ; Best score = 0.987413
+2026-10-16 10:35:08,871 Early stopping. Check your saved model.
+2026-10-16 10:35:18,818 Loading checkpoint from 'outputs/phobertv2_crf_hierarchical_supcon_vast_3090/best_model.pt' on device 'cuda'...
+2026-10-16 10:35:33,242 Running evaluation on test set (10278 samples)...
+2026-10-16 10:37:19,564 Processed 243616 tokens with 20979 phrases; Found: 21039 phrases; correct: 20908.
+2026-10-16 10:37:19,565 Accuracy: 0.9986; (without `O` tag)
+2026-10-16 10:37:19,565 Accuracy: 0.9992;  Precision: 0.9938; Recall: 0.9966; F1-score: 0.9952
+2026-10-16 10:37:19,566                CQ: Precision: 0.9974; Recall: 0.9988; F1-score: 0.9981  7321
+2026-10-16 10:37:19,567                NG: Precision: 1.0000; Recall: 1.0000; F1-score: 1.0000  4021
+2026-10-16 10:37:19,568                SL: Precision: 0.9712; Recall: 0.9866; F1-score: 0.9788  1666
+2026-10-16 10:37:19,568              VBPL: Precision: 0.9751; Recall: 0.9915; F1-score: 0.9832  842
+2026-10-16 10:37:19,569                ĐT: Precision: 0.9940; Recall: 0.9954; F1-score: 0.9947  7189
+2026-10-16 10:37:19,873               precision    recall  f1-score   support
+
+           O     0.9999    0.9993    0.9996    205461
+        B-CQ     0.9985    0.9993    0.9989      7311
+        I-CQ     0.9896    0.9970    0.9933      2677
+        B-ĐT     0.9986    0.9990    0.9988      7179
+        I-ĐT     0.9907    0.9987    0.9947      6003
+      B-VBPL     0.9857    0.9976    0.9916       828
+      I-VBPL     0.9897    0.9996    0.9947      2801
+        B-NG     1.0000    1.0000    1.0000      4021
+        I-NG     1.0000    1.0000    1.0000      4023
+        B-SL     0.9837    0.9976    0.9906      1638
+        I-SL     0.9952    0.9892    0.9922      1674
+
+    accuracy                         0.9992    243616
+   macro avg     0.9938    0.9979    0.9959    243616
+weighted avg     0.9992    0.9992    0.9992    243616
+
