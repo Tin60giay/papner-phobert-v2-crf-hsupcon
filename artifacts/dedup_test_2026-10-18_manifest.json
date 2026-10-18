@@ -1,0 +1,103 @@
+{
+  "description": "Inference-only deduplicated PAP_NER test, no retraining; local CPU Jupyter execution, not Kaggle",
+  "date": "2026-10-18",
+  "checkpoint_release": "v1.0.0",
+  "checkpoint_sha256": "449743cbb5b89ab8860d46875577a170600208a00120150772b799cfbd351bab",
+  "files": [
+    {
+      "path": "notebooks/PAPNER_HSupCon_Predict_Test_Kaggle.ipynb",
+      "bytes": 56756,
+      "sha256": "b16a81f92c4fc961ed06ac1d96dc315a8308b6b8632c1d339365b6407f881542"
+    },
+    {
+      "path": "notebooks/PAPNER_HSupCon_Predict_Test_Executed_CPU.ipynb",
+      "bytes": 304805,
+      "sha256": "d83ff10ddf49380613266706358053068712e361625cea421f8e4ea622747dcc"
+    },
+    {
+      "path": "reports/dedup_test_2026-10-18/bio_confusion_matrix.png",
+      "bytes": 120561,
+      "sha256": "7f5d5d72e9737e7aa6b510369222893cbca84020b5e4c596d7a97bd9370ec667"
+    },
+    {
+      "path": "reports/dedup_test_2026-10-18/bio_token_metrics.csv",
+      "bytes": 983,
+      "sha256": "6f102c143b4f75c00c8302a8ede70f7ffb56501d27a3d332039eeb08a4e8aede"
+    },
+    {
+      "path": "reports/dedup_test_2026-10-18/checkpoint_training_config.json",
+      "bytes": 1227,
+      "sha256": "4e32b8aa0ba57b70ab10b9795449324ae9d4216a28f8f151542cb179ec28c692"
+    },
+    {
+      "path": "reports/dedup_test_2026-10-18/entity_f1_heatmap.png",
+      "bytes": 83239,
+      "sha256": "564273bde3f3e05e767e41ad2e9d535374ba8ea7bda0f69590be04e506cb96ff"
+    },
+    {
+      "path": "reports/dedup_test_2026-10-18/entity_metric_counts.csv",
+      "bytes": 1798,
+      "sha256": "03617f946cf06f85be1843b2c9a50fbb3c2fe7e4646812cc8b23387b7cac0d16"
+    },
+    {
+      "path": "reports/dedup_test_2026-10-18/entity_metrics.csv",
+      "bytes": 1607,
+      "sha256": "14406f2e6296ca00ccf2739fc02448e10f0f1cc45f38b52d6d8d8111aaae3340"
+    },
+    {
+      "path": "reports/dedup_test_2026-10-18/long_sentences.csv",
+      "bytes": 46,
+      "sha256": "a843adbf1ef49c56d2aa42fa4fb439028b635eaee6c07f685dd99a1e7d0967ad"
+    },
+    {
+      "path": "reports/dedup_test_2026-10-18/run_manifest.json",
+      "bytes": 2160,
+      "sha256": "4a7a437249840968cc10a5fbca7d2477dfea8afb2a413c169cb7ac8e18272d4c"
+    },
+    {
+      "path": "reports/dedup_test_2026-10-18/strict_metrics_by_entity.png",
+      "bytes": 33506,
+      "sha256": "21baa581d1739d28d9b5f21ac64e6d1b8ac5665e27a44f2f2eeb0de3cfd399b4"
+    },
+    {
+      "path": "reports/dedup_test_2026-10-18/test_predictions.txt",
+      "bytes": 1862703,
+      "sha256": "46df3763a40a96cef17690eec1f0da751d4c406b643a1f7d8f10c8742d284547"
+    },
+    {
+      "path": "reports/dedup_test_2026-10-18/test_predictions_full.conll",
+      "bytes": 2614212,
+      "sha256": "8e15ed2268b9ab4d70527c904000cf783c1384b7edcb7becdd609e90f9f652bf"
+    },
+    {
+      "path": "reports/dedup_test_2026-10-18/test_predictions_sentences.jsonl",
+      "bytes": 2970583,
+      "sha256": "45e7d5f73f07e2a52d0296252e9c654be4fd99c282289cf670233344bd3cd992"
+    },
+    {
+      "path": "reports/dedup_test_2026-10-18/test_predictions_tokens.csv",
+      "bytes": 3316564,
+      "sha256": "faafb9189b81bca2bded76dab287fcbe58bded596b496a860d5b7657cf36c429"
+    },
+    {
+      "path": "reports/dedup_test_2026-10-18/token_errors.csv",
+      "bytes": 11711,
+      "sha256": "557a64494b6fd7027281e43e129a028210947d166ea39b5e089cf0b7da4edfcf"
+    },
+    {
+      "path": "reports/dedup_test_2026-10-18/validation_report.json",
+      "bytes": 739,
+      "sha256": "fe9301687ab3957b69d72474abc35c4e8cf3d80ab1b8b03551ae6a3e2438d2c4"
+    },
+    {
+      "path": "reports/dedup_test_2026-10-18/notebook_execution_report.json",
+      "bytes": 275,
+      "sha256": "b3ab0803fd6b1cb7f91b99006e4dab37fbfef09f14f0a2e0681349a7b0feaa94"
+    },
+    {
+      "path": "artifacts/papner_hsupcon_dedup_test_2026-10-18.zip",
+      "bytes": 1841193,
+      "sha256": "6333cbfc1acd710f29d6beb1e3bd068f07a0cb1372c0288800ec51c78747314d"
+    }
+  ]
+}

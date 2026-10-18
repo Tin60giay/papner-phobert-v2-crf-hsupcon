@@ -6,6 +6,36 @@ Lần chạy được thực hiện trên **Vast.ai / RTX 3090 24 GB** ngày **1
 
 [Notebook](notebooks/baselineHierarchicalSupCon_PhoBERTv2_Vast_RTX3090.ipynb) · [Model 539 MB](https://github.com/Tin60giay/papner-phobert-v2-crf-hsupcon/releases/download/v1.0.0/best_model.pt) · [Log huấn luyện](logs/train.log) · [Báo cáo](reports/experiment.md)
 
+## Dự đoán lại trên test dedup 70/15/15 — 18/10/2026
+
+Đã bổ sung notebook **chỉ suy luận, không train lại**, dùng chính checkpoint `v1.0.0`:
+
+- **[Xem notebook đã chạy, có dự đoán, bảng điểm và ảnh](notebooks/PAPNER_HSupCon_Predict_Test_Executed_CPU.ipynb)**.
+- [Notebook sạch để Import → Run All trên Kaggle](notebooks/PAPNER_HSupCon_Predict_Test_Kaggle.ipynb).
+- [Kết quả đầy đủ, thông tin môi trường và kiểm chứng](reports/dedup_test_2026-10-18/README.md).
+- [Tải ZIP dự đoán + bảng điểm + biểu đồ](artifacts/papner_hsupcon_dedup_test_2026-10-18.zip).
+
+Lượt này chạy bằng **Jupyter kernel trên CPU máy Windows cục bộ**, không phải Kaggle
+hoặc RTX 3090; không phải một lượt huấn luyện mới. Dùng test của
+[`levandai1704/PAP_NER_dedup_70_15_15`](https://huggingface.co/datasets/levandai1704/PAP_NER_dedup_70_15_15),
+revision `e4af303d22f878e5827c94861f50f747a6b3ed45`: **5.162 câu, 117.462 token**,
+không mất token và không có câu phải chia đoạn.
+
+| Chỉ số tính lại bằng `nervaluate==1.2.1` | Giá trị |
+| --- | ---: |
+| Strict entity Micro-F1 | **98.3815%** |
+| Strict entity Macro-F1 | **98.0372%** |
+| BIO token accuracy | **99.7140%** |
+
+Notebook mới khắc phục cách đọc API `nervaluate` của cell đánh giá, nạp đủ checkpoint
+bằng `strict=True`, không đưa nhãn thật vào model khi dự đoán và xuất cả nhãn thô.
+Các class model/CRF/SupCon và encoder từ notebook gốc được giữ nguyên.
+**Chưa thực thi notebook mới trên hạ tầng Kaggle**; bản Kaggle có hướng dẫn bật Internet/GPU.
+
+Các mục về lần train RTX 3090, log, lỗi notebook gốc và test 10.278 câu bên dưới
+được giữ lại làm hồ sơ lịch sử. **Không so sánh trực tiếp điểm mới với 99.52% trong log cũ**:
+đó là tập test khác và bộ chấm CoNLL khác. Notebook train gốc và checkpoint không bị sửa.
+
 ## Cấu trúc repository
 
 ```text

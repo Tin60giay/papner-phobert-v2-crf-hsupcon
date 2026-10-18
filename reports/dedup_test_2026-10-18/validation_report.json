@@ -1,0 +1,26 @@
+{
+  "nbformat_valid": true,
+  "empty_outputs": true,
+  "standalone_code_cells": 11,
+  "upstream_definitions_unchanged": [
+    "NerOutput",
+    "_disable_amp",
+    "ProjectionHead",
+    "TokenSupConLoss",
+    "PhoBertCrf",
+    "PhoBertV2Crf",
+    "NerFeatures",
+    "encode_phobert_words"
+  ],
+  "full_test_verified_on": "local CPU, torch 2.6.0; not a Kaggle runtime execution",
+  "sentences": 5162,
+  "words": 117462,
+  "token_errors": 336,
+  "export_formats_consistent": true,
+  "source_tokens_and_labels_unchanged": true,
+  "metrics_recomputed_from_export": true,
+  "zip_integrity": true,
+  "strict_entity_micro_f1_pct": 98.38152105593967,
+  "strict_entity_macro_f1_pct": 98.03719849375202,
+  "bio_token_accuracy_pct": 99.7139500434183
+}
