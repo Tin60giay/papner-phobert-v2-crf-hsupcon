@@ -1,0 +1,11 @@
+{
+  "torch": "2.14.1+cu126",
+  "torch_cuda": "12.6",
+  "transformers": "4.44.2",
+  "pytorch-crf": "0.7.2",
+  "nervaluate": "1.2.1",
+  "huggingface_hub": "0.36.2",
+  "python": "3.12",
+  "gpu": "NVIDIA GeForce RTX 3090 24GB",
+  "note": "Observed runtime versions; requirements.txt records the notebook installation list, which is not fully pinned."
+}

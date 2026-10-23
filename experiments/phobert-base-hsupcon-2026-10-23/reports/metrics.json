@@ -1,0 +1,59 @@
+{
+  "source": "../logs/train.log",
+  "model": "vinai/phobert-base",
+  "test_samples": 5162,
+  "test_tokens": 117462,
+  "gold_phrases": 6336,
+  "predicted_phrases": 6379,
+  "correct_phrases": 6265,
+  "completed_epochs": 17,
+  "max_epochs": 20,
+  "best_epoch_zero_based": 12,
+  "best_dev_bio_macro_f1": 0.988903,
+  "test_entity_precision": 0.9821,
+  "test_entity_recall": 0.9888,
+  "test_entity_micro_f1": 0.9855,
+  "test_token_accuracy": 0.9974,
+  "per_entity_type": [
+    {
+      "type": "CQ",
+      "precision": 0.9893,
+      "recall": 0.9917,
+      "f1": 0.9905,
+      "gold_phrases": 2057
+    },
+    {
+      "type": "NG",
+      "precision": 0.9992,
+      "recall": 0.9984,
+      "f1": 0.9988,
+      "gold_phrases": 1227
+    },
+    {
+      "type": "SL",
+      "precision": 0.99,
+      "recall": 1.0,
+      "f1": 0.995,
+      "gold_phrases": 201
+    },
+    {
+      "type": "VBPL",
+      "precision": 0.9377,
+      "recall": 0.9646,
+      "f1": 0.951,
+      "gold_phrases": 610
+    },
+    {
+      "type": "ĐT",
+      "precision": 0.9777,
+      "recall": 0.9863,
+      "f1": 0.982,
+      "gold_phrases": 2284
+    }
+  ],
+  "scorer": "CoNLL evaluator embedded in the notebook; validate() flattens token sequences before scoring.",
+  "rounding": "Metrics preserve the original log rounding.",
+  "paper_report_status": "failed: nervaluate 1.2.1 API return value is incompatible with the unchanged report cell; no Strict/Partial/Entity Type/Exact table was produced",
+  "training_status": "completed with early stopping",
+  "notebook_exit_code": 1
+}

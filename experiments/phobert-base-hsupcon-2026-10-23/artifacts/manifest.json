@@ -1,0 +1,32 @@
+{
+  "model": "vinai/phobert-base",
+  "architecture": "CRF + Hierarchical SupCon",
+  "run_date": "2026-10-23",
+  "timezone": "Asia/Saigon",
+  "notebook_source": "Downloaded byte-for-byte from the executed Vast instance; this is the input notebook, not an executed-output reconstruction.",
+  "original_v2_notebook_unchanged": true,
+  "training_hyperparameters_unchanged": true,
+  "report_cell_unchanged": true,
+  "dataset": "levandai1704/PAP_NER_dedup_70_15_15",
+  "dataset_revision": "e4af303d22f878e5827c94861f50f747a6b3ed45",
+  "train_filename": "train_data_dedup_70_15_15.txt",
+  "dev_filename": "dev_data_dedup_70_15_15.txt",
+  "test_filename": "test_data_dedup_70_15_15.txt",
+  "train_sentences": 24089,
+  "dev_sentences": 5162,
+  "test_sentences": 5162,
+  "test_sha256": "efdc66408ba71099549e301842844556d783b9eaff131c202666d5bd1c2a008d",
+  "model_revision_observed_in_download_cache": "01daacda68afe13d83023d16ec647239e344a1e6",
+  "model_revision_pinned_in_notebook": false,
+  "release": "phobert-base-2026-10-23",
+  "checkpoint": {
+    "filename": "best_model.pt",
+    "bytes": 538671071,
+    "sha256": "6f54f28f4c185541ba1e458b04354a2b7d4f3a80769f9072d76750be34df7892",
+    "url": "https://github.com/Tin60giay/papner-phobert-v2-crf-hsupcon/releases/download/phobert-base-2026-10-23/best_model.pt"
+  },
+  "completed_epochs": 17,
+  "best_epoch_zero_based": 12,
+  "status": "train and test completed; paper report failed",
+  "notebook_exit_code": 1
+}

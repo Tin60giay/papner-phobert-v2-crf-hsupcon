@@ -1,0 +1,12 @@
+# Mirrors the library list in the original notebook. CUDA-enabled PyTorch is provided by the runtime.
+transformers==4.44.2
+pytorch-crf==0.7.2
+huggingface_hub>=0.24,<1.0
+numpy
+pandas
+tqdm
+scikit-learn
+prettytable
+nervaluate==1.2.1
+matplotlib
+vncorenlp
