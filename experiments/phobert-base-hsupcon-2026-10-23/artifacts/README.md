@@ -1,4 +1,4 @@
-# Checkpoint PhoBERT bản gốc · 23/10/2026
+# Checkpoint PhoBERT · 23/10/2026
 
 [Tải best_model.pt](https://github.com/Tin60giay/papner-phobert-v2-crf-hsupcon/releases/download/phobert-base-2026-10-23/best_model.pt) · [Release](https://github.com/Tin60giay/papner-phobert-v2-crf-hsupcon/releases/tag/phobert-base-2026-10-23)
 

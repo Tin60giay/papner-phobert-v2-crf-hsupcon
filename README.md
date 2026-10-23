@@ -4,11 +4,11 @@
 
 | Lần chạy | Backbone / test | Tài liệu |
 | --- | --- | --- |
-| **23/10/2026** | **PhoBERT bản gốc**, test dedup **5.162 câu** | [Code, notebook, log và báo cáo](experiments/phobert-base-hsupcon-2026-10-23/README.md) · [Model](https://github.com/Tin60giay/papner-phobert-v2-crf-hsupcon/releases/tag/phobert-base-2026-10-23) |
+| **23/10/2026** | **PhoBERT**, test dedup **5.162 câu** | [Code, notebook, log và báo cáo](experiments/phobert-base-hsupcon-2026-10-23/README.md) · [Model](https://github.com/Tin60giay/papner-phobert-v2-crf-hsupcon/releases/tag/phobert-base-2026-10-23) |
 | 18/10/2026 | PhoBERT-v2 checkpoint cũ, đánh giá lại test dedup 5.162 câu | [Báo cáo](reports/dedup_test_2026-10-18/README.md) |
 | 16/10/2026 | PhoBERT-v2, train và test cũ 10.278 câu | Phần dưới đây |
 
-Lần PhoBERT gốc mới: dev BIO token macro-F1 **98,8903%**; test CoNLL micro-F1 **98,55%**. Train/test đã xong, cell báo cáo paper cuối lỗi API `nervaluate`; trạng thái và log lỗi được công bố trong báo cáo. Các notebook và kết quả v2 được giữ nguyên.
+Lần PhoBERT mới: dev BIO token macro-F1 **98,8903%**; test CoNLL micro-F1 **98,55%**. Train/test đã xong, cell báo cáo paper cuối lỗi API `nervaluate`; trạng thái và log lỗi được công bố trong báo cáo. Các notebook và kết quả v2 được giữ nguyên.
 
 ## PhoBERT-v2 · Lần huấn luyện 16/10/2026
 

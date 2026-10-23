@@ -1,4 +1,4 @@
-# PhoBERT bản gốc + CRF + Hierarchical SupCon · 23/10/2026
+# PhoBERT + CRF + Hierarchical SupCon · 23/10/2026
 
 Lần huấn luyện `vinai/phobert-base` trên Vast.ai / RTX 3090 24 GB, seed 42. Thay backbone của notebook v2 và đổi sang tập test dedup **5.162 câu**; giữ nguyên tham số huấn luyện. Notebook v2 và artifacts của các lần trước được giữ nguyên.
 
